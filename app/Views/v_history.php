@@ -80,7 +80,17 @@ History Transaksi Pembelian <strong><?= $username ?></strong>
                                 <hr>
                             <?php endforeach; ?>
                         <?php endif; ?>
-                        Ongkir <?= number_to_currency($item['ongkir'], 'IDR') ?>
+                        Ongkir <?= number_to_currency($item['ongkir'] ?? 0, 'IDR') ?><br>
+                        <?php if (!empty($item['voucher_code'])) : ?>
+                            Voucher <strong><?= $item['voucher_code'] ?></strong> :
+                            <span class="text-danger">-<?= number_to_currency($item['diskon_voucher'] ?? 0, 'IDR') ?></span><br>
+                        <?php endif; ?>
+                        Biaya Jasa <?= number_to_currency($item['biaya_jasa'] ?? 0, 'IDR') ?><br>
+                        <?php if (!empty($item['free_mouse']) && $item['free_mouse'] > 0) : ?>
+                            <span class="text-success">Free Mouse (Rp150.000)</span><br>
+                        <?php endif; ?>
+                        <hr>
+                        <strong>Grand Total: <?= number_to_currency($item['total_harga'], 'IDR') ?></strong>
                     </div>
                 </div>
             </div>
